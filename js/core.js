@@ -70,7 +70,7 @@
     opts = opts || {};
     const cm = CodeMirror(parent, {
       value: value || '', mode: 'verilog', lineNumbers: true, matchBrackets: true, autoCloseBrackets: true,
-      indentUnit: 2, tabSize: 2, indentWithTabs: false, lineWrapping: false, viewportMargin: Infinity,
+      indentUnit: 2, tabSize: 2, indentWithTabs: false, lineWrapping: true, viewportMargin: Infinity,
       extraKeys: {
         'Ctrl-Enter': () => opts.onRun && opts.onRun(), 'Cmd-Enter': () => opts.onRun && opts.onRun(),
         Tab: (c) => { if (c.somethingSelected()) c.indentSelection('add'); else c.replaceSelection('  ', 'end'); },

@@ -2,7 +2,7 @@
 window.SC = window.SC || {};
 SC.topics = [
 {
-  id: 'number-systems', title: 'Number systems & codes', lec: 'Self-study 1–2b', icon: '01',
+  id: 'number-systems', title: 'Number systems & codes', lec: 'Self-study 1–2b', icon: '🔢',
   blurb: 'Bases 2/8/10/16, conversions with fractions, BCD, Gray, ASCII, parity.',
   notes: `
 ## Positional number systems
@@ -42,7 +42,7 @@ Result: **D6.4E97<sub>16</sub>** (six digits: D 6 4 E 9 7).
   problems: [],
 },
 {
-  id: 'boolean', title: 'Boolean algebra & gates', lec: 'L1–L3', icon: '&',
+  id: 'boolean', title: 'Boolean algebra & gates', lec: 'L1–L3', icon: '🧩',
   blurb: 'Gates, theorems, De Morgan, NAND/NOR-only circuits, XOR, parity, alternate symbols.',
   notes: `
 ## Basic gates
@@ -109,7 +109,7 @@ A NAND gate is equivalent to an OR gate with inverted inputs; a NOR gate is an A
   problems: ['nand-xor', 'alarm-system'],
 },
 {
-  id: 'arithmetic', title: 'Digital arithmetic', lec: 'L4–L6', icon: '+',
+  id: 'arithmetic', title: 'Digital arithmetic', lec: 'L4–L6', icon: '➕',
   blurb: 'Half/full adders, 2’s complement, overflow, BCD addition, multipliers, fixed/floating point.',
   notes: `
 ## Adders
@@ -164,7 +164,7 @@ Binary multiplication = shift-and-add of partial products (AND gates) summed by 
   problems: ['half-adder', 'full-adder', 'ripple4', 'addsub4', 'bcd-adder', 'mult2'],
 },
 {
-  id: 'kmap', title: 'Canonical forms & K-maps', lec: 'L7–L8', icon: 'K',
+  id: 'kmap', title: 'Canonical forms & K-maps', lec: 'L7–L8', icon: '🗺️',
   blurb: 'Minterms/maxterms, SOP/POS, K-map grouping, don’t-cares, 5 variables, enables.',
   notes: `
 ## Minterms and maxterms
@@ -210,7 +210,7 @@ AND gate with enable EN: Y = EN·X passes X when EN = 1, otherwise the output is
   problems: ['alarm-system'],
 },
 {
-  id: 'logic-families', title: 'Digital circuits: CMOS, TTL & electrical specs', lec: 'L9–L12', icon: 'V',
+  id: 'logic-families', title: 'Digital circuits: CMOS, TTL & electrical specs', lec: 'L9–L12', icon: '🔌',
   blurb: 'Transistor-level CMOS analysis, noise margin, fan-out, tri-state, open-drain, Schmitt trigger, PLA.',
   notes: `
 ## CMOS basics
@@ -263,7 +263,7 @@ A Programmable Logic Array has a programmable **AND plane** (generates product t
   problems: [],
 },
 {
-  id: 'comb-blocks', title: 'Combinational building blocks', lec: 'L13–L14 (Lecture 07)', icon: 'M',
+  id: 'comb-blocks', title: 'Combinational building blocks', lec: 'L13–L14 (Lecture 07)', icon: '🧱',
   blurb: 'Multiplexers, decoders, encoders, comparators; building functions from them.',
   notes: `
 ## Decoder (n → 2<sup>n</sup>)
@@ -302,7 +302,7 @@ A > B, A = B, A < B. Equality is the AND of bitwise XNORs: EQ = (A<sub>3</sub>�
   problems: ['mux4-case', 'dec24-case', 'dec24-ferry', 'prienc42', 'comparator4', 'seg7'],
 },
 {
-  id: 'verilog-comb', title: 'Verilog for combinational circuits', lec: 'L15–L18 (Lectures 08A/08B)', icon: 'v',
+  id: 'verilog-comb', title: 'Verilog for combinational circuits', lec: 'L15–L18 (Lectures 08A/08B)', icon: '💻',
   blurb: 'Modules, wires vs regs, gate primitives, assign, always @*, if/case, parameters, bugs to spot.',
   notes: `
 ## The mindset
@@ -392,7 +392,7 @@ thermo #(.W(12)) U1 (.Tset(Tset), .Tact(Tact), .Hon(Hon), .Con(Con));   // overr
   problems: ['half-adder', 'mux2-assign', 'mux4-case', 'dec24-ferry', 'prienc42', 'parity', 'thermo', 'max3', 'bugfix-comb', 'gray4'],
 },
 {
-  id: 'latches-ff', title: 'Latches, flip-flops & timing', lec: 'L19–L20 (Lecture 09)', icon: 'Q',
+  id: 'latches-ff', title: 'Latches, flip-flops & timing', lec: 'L19–L20 (Lecture 09)', icon: '🔒',
   blurb: 'SR/D latch, edge-triggered D and JK flip-flops, characteristic equations, timing diagrams.',
   notes: `
 ## Combinational vs sequential
@@ -438,7 +438,7 @@ A **register** = n D flip-flops sharing a clock. A **shift register** chains the
   problems: ['dff-sync', 'dff-async'],
 },
 {
-  id: 'seq-verilog', title: 'Sequential circuits in Verilog', lec: 'L21–L22 (Lecture 10)', icon: 'F',
+  id: 'seq-verilog', title: 'Sequential circuits in Verilog', lec: 'L21–L22 (Lecture 10)', icon: '⏱️',
   blurb: 'Clocked always blocks, non-blocking assignment, registers, counters, shift registers, timing prediction.',
   notes: `
 ## The template
@@ -500,7 +500,7 @@ A register after each combinational stage; each stage's input is the *registered
   problems: ['dff-sync', 'dff-async', 'reg-en', 'cnt3', 'cnt20', 'cnt-max', 'cnt-down', 'updown', 'shift4', 'johnson', 'monitor-alarm'],
 },
 {
-  id: 'fsm', title: 'Finite state machines', lec: 'L23–L24 (Lecture 11)', icon: 'S',
+  id: 'fsm', title: 'Finite state machines', lec: 'L23–L24 (Lecture 11)', icon: '🚦',
   blurb: 'Moore/Mealy, state diagrams and tables, encoding, next-state and output equations, D flip-flop implementation.',
   notes: `
 ## What an FSM is
@@ -552,7 +552,7 @@ Input 0,1,0,1,1,0,1,1,0,0,0,1,0,1,1 → state after each: S0 S1 S0 S1 S2 S3 S2 S
   problems: ['fsm-seq', 'moore-1011', 'traffic'],
 },
 {
-  id: 'fsm-verilog', title: 'FSMs in Verilog', lec: 'L25–L26 (Lecture 12)', icon: 'Ƒ',
+  id: 'fsm-verilog', title: 'FSMs in Verilog', lec: 'L25–L26 (Lecture 12)', icon: '🤖',
   blurb: 'Three-block template, state encoding with localparam, Moore vs Mealy outputs, testbench sequences.',
   notes: `
 ## Standard template (memorise)

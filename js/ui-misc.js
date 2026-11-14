@@ -18,10 +18,10 @@
 <div class="row"><a class="btn primary big" href="#/exams">Take a mock exam</a><a class="btn big" href="#/playground">Open Verilog playground</a></div></div>
 <div class="card examfacts"><h3>Final exam format</h3><ul><li><b>Nov/Dec 2026</b>, 1 hour 30 minutes</li><li><b>Closed book</b></li><li><b>2 questions</b>, unequal marks</li><li><b>Q1</b>: answers shaded on the OMR sheet</li><li><b>Q2</b>: written on the question paper (only these answers are assessed)</li></ul><a href="#/prep">Exam strategy →</a></div></div>
 <div class="grid quick">
-<a class="card qk" href="#/cards"><h3>Flashcards</h3><p>${due} due today</p>${bar(p.cardsKnown, p.cardsTotal)}<small>${p.cardsKnown}/${p.cardsTotal} well known</small></a>
-<a class="card qk" href="#/practice${nextP ? '/' + nextP.id : ''}"><h3>Verilog problems</h3><p>${nextP ? 'Next: ' + esc(nextP.title) : 'All solved'}</p>${bar(p.solved, p.problems)}<small>${p.solved}/${p.problems} solved</small></a>
-<a class="card qk" href="#/quiz"><h3>MCQ (Question 1)</h3><p>${p.mcq} questions with explanations</p>${bar(p.mcqOk, p.mcq)}<small>${p.mcqOk} answered correctly</small></a>
-<a class="card qk" href="#/drills"><h3>Drills</h3><p>Base conversion · 2’s complement · K-maps · register traces</p><small>Endless generated questions</small></a>
+<a class="card qk" href="#/cards"><h3><span class="qi">🃏</span>Flashcards</h3><p>${due} due today</p>${bar(p.cardsKnown, p.cardsTotal)}<small>${p.cardsKnown}/${p.cardsTotal} well known</small></a>
+<a class="card qk" href="#/practice${nextP ? '/' + nextP.id : ''}"><h3><span class="qi">⌨️</span>Verilog problems</h3><p>${nextP ? 'Next: ' + esc(nextP.title) : 'All solved'}</p>${bar(p.solved, p.problems)}<small>${p.solved}/${p.problems} solved</small></a>
+<a class="card qk" href="#/quiz"><h3><span class="qi">✅</span>MCQ (Question 1)</h3><p>${p.mcq} questions with explanations</p>${bar(p.mcqOk, p.mcq)}<small>${p.mcqOk} answered correctly</small></a>
+<a class="card qk" href="#/drills"><h3><span class="qi">🎯</span>Drills</h3><p>Base conversion · 2’s complement · K-maps · register traces</p><small>Endless generated questions</small></a>
 </div>
 <h2>Topics</h2>
 <div class="grid topics compact">${SC.topics.map((t, i) => `<a class="card topic" href="#/learn/${t.id}"><div class="ticon">${esc(t.icon)}</div><div><div class="tnum">${esc(t.lec)}</div><h3>${esc(t.title)}</h3></div></a>`).join('')}</div>

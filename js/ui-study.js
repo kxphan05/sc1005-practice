@@ -157,7 +157,7 @@ ${SC.decks.map((d) => { const s = deckStats(d.id); return `<a class="card deck" 
     const stats = SC.store.get('drillstats', {});
     app.innerHTML = `<section class="page"><h1>Drills</h1>
 <p class="lead">Endless, freshly generated, exam-style questions. K-map answers are checked for logical equivalence (type any equivalent form) and for minimality; register-prediction answers come from the Verilog simulator.</p>
-<div class="grid topics">${SC.drills.map((d) => { const s = stats[d.id] || { n: 0, ok: 0 }; return `<a class="card topic" href="#/drills/${d.id}"><div class="ticon">∞</div><div><h3>${esc(d.title)}</h3><p>${esc(d.desc)}</p><div class="chips"><span class="chip">${s.ok}/${s.n} correct</span></div></div></a>`; }).join('')}</div></section>`;
+<div class="grid topics">${SC.drills.map((d) => { const s = stats[d.id] || { n: 0, ok: 0 }; return `<a class="card topic" href="#/drills/${d.id}"><div class="ticon">${({base:"🔄",twos:"➖",kmap:"🗺️",codes:"🎨",predict:"🔮","fsm-trace":"🚦",bcdadd:"🧮"})[d.id]||"∞"}</div><div><h3>${esc(d.title)}</h3><p>${esc(d.desc)}</p><div class="chips"><span class="chip">${s.ok}/${s.n} correct</span></div></div></a>`; }).join('')}</div></section>`;
   });
 
   SC.route('/drills/:id', (app, { id }) => {
