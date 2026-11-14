@@ -382,7 +382,7 @@ endmodule` },
 <div class="prob-grid">
 <div class="prob-left">
   <h1>${esc(p.title)} ${solved[id] ? '<span class="ok badge">solved</span>' : ''}</h1>
-  <div class="chips"><span class="lv l${p.level}">${'●'.repeat(p.level)}</span><span class="chip">${esc(p.source)}</span>${p.must || p.forbid ? '<span class="chip warn">construct restrictions</span>' : ''}</div>
+  <div class="chips"><span class="lv l${p.level}">${'●'.repeat(p.level)}</span><span class="chip">${esc(p.source)}</span>${p.pdf ? mdInline(p.pdf) : ''}${p.must || p.forbid ? '<span class="chip warn">construct restrictions</span>' : ''}</div>
   <div class="prose">${md(p.statement)}</div>
   ${p.provided ? `<details open class="prov"><summary>Provided module (already available, do not redefine)</summary><pre class="code"><code>${esc(p.provided)}</code></pre></details>` : ''}
   <div class="hints"><button class="btn ghost" id="hint">Hint</button> <button class="btn ghost" id="sol">Show solution</button><div id="hintbox"></div></div>

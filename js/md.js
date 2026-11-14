@@ -1,5 +1,6 @@
 /* Tiny markdown renderer for notes & flashcards.
- * Supports: # ## ###, paragraphs, - lists, 1. lists, | tables |, ``` fenced code, > [!tip|trap|exam|note] callouts,
+ * Supports: # ## ###, paragraphs, - lists, 1. lists, | tables |, ``` fenced code, > [!tip|trap|exam|note|key|extra|slides] callouts,
+ * [src:KEY pN] source citations (see content/sources.js),
  * **bold**, *italic*, `code`, raw HTML blocks (lines starting with '<').
  */
 (function (root) {
@@ -12,7 +13,23 @@
     s = s.replace(/<(?!\/?(sub|sup|br|span|b|i|em|strong|small|u|code)\b)/g, '&lt;');
     s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?!\w)/g, '$1<em>$2</em>');
     s = s.replace(/\u0000(\d+)\u0000/g, (_, i) => `<code>${esc(codes[+i])}</code>`);
+    s = s.replace(/\[src:([^\]]+)\]/g, (_, spec) => srcLinks(spec));
     return s;
+  }
+  /* [src:09 p33] / [src:09 p27-29] / [src:rev Q4] / [src:09 p33; tut8 Q2] -> links into the course PDFs (content/sources.js) */
+  function srcLinks(spec) {
+    const S = (root.SC && root.SC.sources) || {};
+    return '<span class="srcs">' + spec.split(';').map((part) => {
+      const m = /^\s*(\S+)\s*(.*?)\s*$/.exec(part);
+      if (!m) return '';
+      const s = S[m[1]], loc = m[2];
+      if (!s) return `<span class="src bad">${esc(part.trim())}</span>`;
+      const pm = /^p(\d+)(?:[-–](\d+))?$/.exec(loc);
+      const href = encodeURI(s.path) + (pm ? '#page=' + pm[1] : '');
+      const label = s.short + (loc ? ' · ' + (pm ? 'p.' + pm[1] + (pm[2] ? '–' + pm[2] : '') : loc) : '');
+      const title = s.name + (s.lec ? ' (' + s.lec + ')' : '') + (pm ? ', PDF page ' + pm[1] + (pm[2] ? '–' + pm[2] : '') : '');
+      return `<a class="src" href="${href}" target="_blank" rel="noopener" title="${esc(title)}">${esc(label)}</a>`;
+    }).join('') + '</span>';
   }
   function md(src) {
     const lines = src.replace(/\r/g, '').split('\n');
@@ -41,14 +58,24 @@
         let kind = 'note', first = buf[0];
         const k = /^\[!(\w+)\]\s*(.*)$/.exec(first);
         if (k) { kind = k[1]; buf[0] = k[2]; }
-        const title = { tip: 'Tip', trap: 'Exam trap', exam: 'In the exam', note: 'Note', key: 'Key idea' }[kind] || kind;
+        const title = { tip: 'Tip', trap: 'Exam trap', exam: 'In the exam', note: 'Note', key: 'Key idea', extra: 'Beyond the slides', slides: 'What the slides say' }[kind] || kind;
         out.push(`<div class="callout ${kind}"><div class="ct">${title}</div>${md(buf.join('\n'))}</div>`);
         continue;
       }
       if (/^\|/.test(l)) {
         const rows = [];
         while (i < lines.length && /^\|/.test(lines[i])) rows.push(lines[i++]);
-        const cells = (r) => r.replace(/^\||\|\s*$/g, '').split('|').map((c) => c.trim());
+        // split on | but not inside `code` (so `a || b` stays in one cell)
+        const cells = (r) => {
+          const s = r.trim().replace(/^\|/, '').replace(/\|$/, '');
+          const out = []; let cur = '', code = false;
+          for (const ch of s) {
+            if (ch === '`') code = !code;
+            if (ch === '|' && !code) { out.push(cur.trim()); cur = ''; } else cur += ch;
+          }
+          out.push(cur.trim());
+          return out;
+        };
         const head = cells(rows[0]);
         const body = rows.slice(/^\|[\s:|-]+\|?\s*$/.test(rows[1] || '') ? 2 : 1);
         out.push(`<div class="tw"><table><thead><tr>${head.map((c) => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${body.map((r) => `<tr>${cells(r).map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);

@@ -5,7 +5,7 @@ window.SC = window.SC || {};
 SC.problems = [
 /* -------------------------------------------------------- gates & boolean */
 {
-  id: 'nand-xor', title: 'XOR from four NAND gates', topic: 'boolean', level: 1, source: 'L2 / NAND-only designs',
+  id: 'nand-xor', title: 'XOR from four NAND gates', topic: 'boolean', level: 1, source: 'L2 / NAND-only designs', pdf: '[src:3 p46-48]',
   statement: `Build an XOR gate **using only \`nand\` gate primitives** (no \`assign\`, no other gate types). Four 2-input NANDs are enough.
 
 \`y = a ⊕ b\``,
@@ -24,7 +24,7 @@ endmodule`,
   must: ['\\bnand\\b'], forbid: ['\\bassign\\b', '\\bxor\\b', '\\bxnor\\b', '\\band\\b', '\\bor\\b', '\\bnor\\b', '\\bnot\\b', 'always', '\\^'],
 },
 {
-  id: 'alarm-system', title: 'Alarm system', topic: 'boolean', level: 1, source: 'Revision practice Q2',
+  id: 'alarm-system', title: 'Alarm system', topic: 'boolean', level: 1, source: 'Revision practice Q2', pdf: '[src:rev Q2; revA Q2]',
   statement: `An alarm output is HIGH whenever
 
 - the **panic** input is HIGH, **or**
@@ -42,7 +42,7 @@ endmodule`,
 },
 /* -------------------------------------------------------------- arithmetic */
 {
-  id: 'half-adder', title: 'Half adder', topic: 'arithmetic', level: 1, source: 'L4',
+  id: 'half-adder', title: 'Half adder', topic: 'arithmetic', level: 1, source: 'L4 / Lec 08A half adder', pdf: '[src:4 p5; 08A p20]',
   statement: `Write a half adder: \`s\` = sum, \`c\` = carry of the two 1-bit inputs.`,
   starter: `module half_adder (input a, b, output s, c);
 
@@ -54,7 +54,7 @@ endmodule`,
   hints: ['s is XOR, c is AND.'],
 },
 {
-  id: 'full-adder', title: 'Full adder', topic: 'arithmetic', level: 1, source: 'L4',
+  id: 'full-adder', title: 'Full adder', topic: 'arithmetic', level: 1, source: 'L4 / Lec 08A full adder', pdf: '[src:4 p6-10; 08A p39]',
   statement: `Write a full adder with carry-in \`cin\` and carry-out \`cout\`. You may use \`assign\` with a concatenation: \`{cout, s} = a + b + cin\`.`,
   starter: `module full_adder (input a, b, cin, output s, cout);
 
@@ -65,7 +65,7 @@ endmodule`,
   hints: ['s = a ^ b ^ cin;  cout = a&b | cin&(a^b)', 'Or: assign {cout, s} = a + b + cin; (1-bit operands are widened to the 2-bit target).'],
 },
 {
-  id: 'ripple4', title: '4-bit ripple-carry adder', topic: 'arithmetic', level: 2, source: 'L4 / structural Verilog',
+  id: 'ripple4', title: '4-bit ripple-carry adder', topic: 'arithmetic', level: 2, source: 'L4 / structural Verilog', pdf: '[src:4 p12-13; 08A p29-34]',
   statement: `Build a 4-bit ripple-carry adder by **instantiating four copies of the provided \`fa\` module** (it is already available, do not redefine it).
 
 Bit \`i\` of \`s\` comes from stage \`i\`; the carry of stage \`i\` feeds stage \`i+1\`.`,
@@ -89,7 +89,7 @@ endmodule`,
   must: ['\\bfa\\b'],
 },
 {
-  id: 'addsub4', title: '4-bit adder/subtractor with overflow', topic: 'arithmetic', level: 2, source: 'L6',
+  id: 'addsub4', title: '4-bit adder/subtractor with overflow', topic: 'arithmetic', level: 2, source: 'L5–L6 add/subtract circuit', pdf: '[src:4 p42-48]',
   statement: `Design \`addsub\`: when \`sub = 0\` compute \`a + b\`, when \`sub = 1\` compute \`a − b\` (= a + ~b + 1). Treat \`a\`, \`b\`, \`s\` as 4-bit **2's complement** numbers.
 
 - \`s\`: the 4-bit result
@@ -106,7 +106,7 @@ endmodule`,
   hints: ['bb = b ^ {4{sub}} inverts b when sub = 1. Then {cout,s} = a + bb + sub.', 'ovf = (a[3] == bb[3]) && (s[3] != a[3]).'],
 },
 {
-  id: 'bcd-adder', title: 'BCD digit adder', topic: 'arithmetic', level: 3, source: 'Past paper CZ1005 2018/19 S2 Q2(b)',
+  id: 'bcd-adder', title: 'BCD digit adder', topic: 'arithmetic', level: 3, source: 'Past paper 2018/19 S2 Q2(b)', pdf: '[src:pp1819s2 Q2b; 4 p59-61]',
   statement: `Add two BCD digits \`a\`, \`b\` and a carry-in \`cin\`. Let \`t = a + b + cin\` (5-bit result).
 
 - If \`t > 9\`: \`cout = 1\` and \`sum = (t + 6)[3:0]\`
@@ -124,7 +124,7 @@ endmodule`,
   hints: ['wire [4:0] t = a + b + cin;  cout = t > 9;', 'sum = cout ? t + 6 : t, then keep the lower 4 bits.'],
 },
 {
-  id: 'mult2', title: '2×2 multiplier', topic: 'arithmetic', level: 1, source: 'Revision practice Q5',
+  id: 'mult2', title: '2×2 multiplier', topic: 'arithmetic', level: 1, source: 'Revision practice Q5', pdf: '[src:rev Q5; revA Q5]',
   statement: `Multiply two 2-bit unsigned numbers \`x\` and \`y\` giving a 4-bit product \`z\`.`,
   starter: `module mult2 (input [1:0] x, y, output [3:0] z);
 
@@ -136,7 +136,7 @@ endmodule`,
 },
 /* --------------------------------------------------- combinational blocks */
 {
-  id: 'mux2-assign', title: '2-to-1 multiplexer (conditional operator)', topic: 'verilog-comb', level: 1, source: 'L16',
+  id: 'mux2-assign', title: '2-to-1 multiplexer (conditional operator)', topic: 'verilog-comb', level: 1, source: 'L14–L15 conditional assignment', pdf: '[src:08A p42]',
   statement: `Output \`y = b\` when \`sel = 1\`, otherwise \`y = a\`. Use the **conditional operator \`? :\`** in one \`assign\`.`,
   starter: `module mux2 (input a, b, sel, output y);
 
@@ -147,7 +147,7 @@ endmodule`,
   hints: ['assign y = sel ? b : a;'], must: ['\\?'],
 },
 {
-  id: 'mux4-case', title: '4-to-1 multiplexer (case)', topic: 'comb-blocks', level: 1, source: 'L16 / Tutorial 6',
+  id: 'mux4-case', title: '4-to-1 multiplexer (case)', topic: 'comb-blocks', level: 1, source: 'L16 / Tutorial 6', pdf: '[src:08B p15; tut6 Q1]',
   statement: `\`d[s]\` is selected by the 2-bit \`s\`. Use an \`always @*\` block with a \`case\` statement (so \`y\` must be a \`reg\`).`,
   starter: `module mux4 (input [3:0] d, input [1:0] s, output reg y);
 
@@ -165,7 +165,7 @@ endmodule`,
   hints: ['always @* begin case (s) 2\'b00: y = d[0]; ... default: ... endcase end'], must: ['\\bcase\\b'],
 },
 {
-  id: 'dec24-ferry', title: 'Ferry boarding system', topic: 'comb-blocks', level: 2, source: 'Tutorial 6 Q3',
+  id: 'dec24-ferry', title: 'Ferry boarding system', topic: 'comb-blocks', level: 2, source: 'Tutorial 6 Q3', pdf: '[src:tut6 Q3; 13 p7]',
   statement: `Cars are directed to one of four boarding ramps. A 2-bit input \`ramp\` selects the ramp and \`full\` is HIGH when all ramps are full. Four outputs \`green[3:0]\` drive the green lights, **one-hot** (only the selected light on); **no light** when \`full\`.
 
 Instantiate the **provided \`dec2to4\` decoder** (already available):
@@ -186,7 +186,7 @@ endmodule`,
   hints: ['The decoder is enabled when the ramps are NOT full: .en(~full).'], must: ['\\bdec2to4\\b'],
 },
 {
-  id: 'prienc42', title: '4-to-2 priority encoder', topic: 'comb-blocks', level: 2, source: 'L16 (casez / if-else)',
+  id: 'prienc42', title: '4-to-2 priority encoder', topic: 'comb-blocks', level: 2, source: 'Extension (not in the slides)',
   statement: `\`r[3]\` has the highest priority. \`code\` is the index of the highest asserted request; \`valid\` = 1 if any request is asserted. If none, \`code = 0\` and \`valid = 0\`.
 
 Use \`if / else if\` or \`casez\` in an \`always @*\` block.`,
@@ -206,7 +206,7 @@ endmodule`,
   hints: ['Check r[3] first, then r[2], r[1], r[0] (priority order).', 'Assign **both** outputs in every branch (or set defaults first) to avoid latches.'],
 },
 {
-  id: 'comparator4', title: '4-bit magnitude comparator', topic: 'comb-blocks', level: 1, source: 'L14',
+  id: 'comparator4', title: '4-bit magnitude comparator', topic: 'comb-blocks', level: 1, source: 'L3 comparator / L14 operators', pdf: '[src:3 p58; 08A p43]',
   statement: `Three outputs: \`gt\` = (a > b), \`eq\` = (a == b), \`lt\` = (a < b). Inputs are unsigned.`,
   starter: `module cmp4 (input [3:0] a, b, output gt, eq, lt);
 
@@ -219,7 +219,7 @@ endmodule`,
   hints: ['Relational operators return 1-bit results.'],
 },
 {
-  id: 'seg7', title: 'BCD to 7-segment decoder', topic: 'comb-blocks', level: 2, source: 'Lab 3',
+  id: 'seg7', title: 'BCD to 7-segment decoder', topic: 'comb-blocks', level: 2, source: 'L13 / Lab 3', pdf: '[src:07 p12-15]',
   statement: `Decode a BCD digit \`bcd[3:0]\` to the segments \`seg[6:0] = {a,b,c,d,e,f,g}\` (**active-high**, 1 = lit). Digits 0–9 as on a standard display (7 is \`a,b,c\` only; 6 and 9 have their tails); inputs 10–15 turn **all segments off**.
 
 | digit | abcdefg | digit | abcdefg |
@@ -252,7 +252,7 @@ endmodule`,
   hints: ['One case item per digit plus a `default`.'], must: ['\\bcase\\b'],
 },
 {
-  id: 'parity', title: 'Even-parity generator', topic: 'verilog-comb', level: 1, source: 'L3 / reduction operators',
+  id: 'parity', title: 'Even-parity generator', topic: 'verilog-comb', level: 1, source: 'L3 parity / self-study 2b', pdf: '[src:2b p27-29; 3 p59]',
   statement: `Output \`p\` such that the 8 data bits plus \`p\` contain an **even** number of 1s. Use a reduction operator.`,
   starter: `module parity_gen (input [7:0] d, output p);
 
@@ -263,7 +263,7 @@ endmodule`,
   hints: ['`^d` XORs all bits of d together: 1 when d has an odd number of ones.'],
 },
 {
-  id: 'thermo', title: 'Digital thermostat', topic: 'verilog-comb', level: 2, source: 'Tutorial 7 Q2',
+  id: 'thermo', title: 'Digital thermostat', topic: 'verilog-comb', level: 2, source: 'Tutorial 7 Q2', pdf: '[src:tut7 Q2; 08A p56-57]',
   statement: `Two unsigned inputs \`Tset\` (target) and \`Tact\` (actual), parameterised width **W** (default 8).
 
 - \`Hon\` = 1 when the actual temperature is at least 4 below the target: \`Tset >= Tact + 4\`
@@ -281,7 +281,7 @@ endmodule`,
   hints: ['Widen first: {1\'b0, Tact} + 4, so 255 + 4 does not wrap around to 3.'],
 },
 {
-  id: 'max3', title: 'Max, min and difference of three numbers', topic: 'verilog-comb', level: 2, source: 'Tutorial 8 Q1',
+  id: 'max3', title: 'Max, min and difference of three numbers', topic: 'verilog-comb', level: 2, source: 'Tutorial 8 Q1', pdf: '[src:tut8 Q1; 08B p10]',
   statement: `Three 8-bit unsigned inputs \`a, b, c\`. Output the largest (\`max\`), the smallest (\`min\`) and their difference (\`diff = max − min\`). Use \`if\` statements in an \`always @*\` block.`,
   starter: `module max3 (input [7:0] a, b, c, output reg [7:0] max, min, diff);
 
@@ -299,7 +299,7 @@ endmodule`,
   hints: ['Start with max = min = a, then compare with b and c.', 'Use blocking `=`; `diff` is computed after max/min inside the same block.'],
 },
 {
-  id: 'bugfix-comb', title: 'Fix the buggy multiplexer', topic: 'verilog-comb', level: 2, source: 'Tutorial 7 Q3',
+  id: 'bugfix-comb', title: 'Fix the buggy multiplexer', topic: 'verilog-comb', level: 2, source: 'Tutorial 7 Q3', pdf: '[src:tut7 Q3; 08B p22-25]',
   statement: `The module below should output \`a\`, \`b\` or \`c\` according to \`sel\` (00, 01, 10) and **0** when \`sel = 11\`. It contains several mistakes that stop it from synthesising correctly. **Fix them** (the port list must stay the same).
 
 Look for: the output type, the sensitivity list, the missing \`default\`, and the stray punctuation.`,
@@ -331,7 +331,7 @@ endmodule`,
   hints: ['`result` is assigned in an always block so it must be `output reg`.', 'Use `always @*` so changes to c and sel also trigger the block.', 'Add `default: result = 0;` (otherwise a latch is inferred) and delete the `;` after `endmodule`.'],
 },
 {
-  id: 'gray4', title: 'Binary to Gray code', topic: 'verilog-comb', level: 1, source: 'Self-study 2b',
+  id: 'gray4', title: 'Binary to Gray code', topic: 'verilog-comb', level: 1, source: 'Self-study 2b', pdf: '[src:2b p12-13]',
   statement: `Convert a 4-bit binary number \`b\` to its Gray code \`g\` (g = b ⊕ (b >> 1)).`,
   starter: `module bin2gray (input [3:0] b, output [3:0] g);
 
@@ -343,7 +343,7 @@ endmodule`,
 },
 /* ----------------------------------------------------------------- sequential */
 {
-  id: 'dff-sync', title: 'D flip-flop, synchronous reset', topic: 'latches-ff', level: 1, source: 'L19',
+  id: 'dff-sync', title: 'D flip-flop, synchronous reset', topic: 'latches-ff', level: 1, source: 'L19', pdf: '[src:10 p8]',
   statement: `Positive-edge-triggered D flip-flop. When \`rst\` is 1 at a rising clock edge \`q\` becomes 0 (**synchronous** reset); otherwise \`q\` takes \`d\`.`,
   starter: `module dff (input clk, rst, d, output reg q);
 
@@ -357,7 +357,7 @@ endmodule`,
   hints: ['always @(posedge clk) with non-blocking assignments.'], must: ['posedge'],
 },
 {
-  id: 'dff-async', title: 'D flip-flop, asynchronous reset', topic: 'latches-ff', level: 1, source: 'L19',
+  id: 'dff-async', title: 'D flip-flop, asynchronous reset', topic: 'latches-ff', level: 1, source: 'L19', pdf: '[src:10 p10]',
   statement: `As before, but \`rst\` is **asynchronous**: as soon as \`rst\` goes HIGH, \`q\` becomes 0 without waiting for a clock edge.`,
   starter: `module dff_ar (input clk, rst, d, output reg q);
 
@@ -371,7 +371,7 @@ endmodule`,
   hints: ['Put the reset in the sensitivity list: @(posedge clk or posedge rst).'],
 },
 {
-  id: 'reg-en', title: '8-bit register with enable', topic: 'seq-verilog', level: 1, source: 'L19',
+  id: 'reg-en', title: '8-bit register with enable', topic: 'seq-verilog', level: 1, source: 'L19', pdf: '[src:10 p5; 10 p30]',
   statement: `8-bit register: synchronous reset to 0; otherwise, if \`en = 1\`, load \`d\`; if \`en = 0\` hold the value.`,
   starter: `module reg8 (input clk, rst, en, input [7:0] d, output reg [7:0] q);
 
@@ -385,7 +385,7 @@ endmodule`,
   hints: ['No `else` for the hold case is needed: a flip-flop keeps its value if not assigned (this is fine in a *clocked* block).'],
 },
 {
-  id: 'cnt3', title: '3-bit up counter', topic: 'seq-verilog', level: 1, source: 'L19',
+  id: 'cnt3', title: '3-bit up counter', topic: 'seq-verilog', level: 1, source: 'L19', pdf: '[src:10 p16-19]',
   statement: `3-bit binary counter, counts up on each rising edge (000, 001, … 111, 000 …). Synchronous reset to 0.`,
   starter: `module counter3 (input clk, rst, output reg [2:0] q);
 
@@ -399,7 +399,7 @@ endmodule`,
   hints: ['q <= q + 1; wraps around automatically after 7.'],
 },
 {
-  id: 'cnt20', title: 'Counter that counts 0 … 20', topic: 'seq-verilog', level: 2, source: 'Tutorial 9 Q3(a)',
+  id: 'cnt20', title: 'Counter that counts 0 … 20', topic: 'seq-verilog', level: 2, source: 'Tutorial 9 Q3(a)', pdf: '[src:tut9 Q3]',
   statement: `5-bit counter that counts up to 20 and then wraps to 0 (…19, 20, 0, 1…). Synchronous reset to 0.`,
   starter: `module cnt20 (input clk, rst, output reg [4:0] q);
 
@@ -414,7 +414,7 @@ endmodule`,
   hints: ['Check q == 20 *before* incrementing.'],
 },
 {
-  id: 'cnt-max', title: 'Counter with programmable maximum', topic: 'seq-verilog', level: 2, source: 'Tutorial 9 Q3(b)',
+  id: 'cnt-max', title: 'Counter with programmable maximum', topic: 'seq-verilog', level: 2, source: 'Tutorial 9 Q3(b)', pdf: '[src:tut9 Q3]',
   statement: `As the previous problem, but the wrap value comes from the 5-bit input \`countmax\`: when \`q == countmax\` the next value is 0, otherwise \`q + 1\`. Synchronous reset to 0.`,
   starter: `module cntmax (input clk, rst, input [4:0] countmax, output reg [4:0] q);
 
@@ -429,7 +429,7 @@ endmodule`,
   hints: ['Replace the constant 20 by countmax.'],
 },
 {
-  id: 'cnt-down', title: 'Down counter loaded on reset', topic: 'seq-verilog', level: 2, source: 'Tutorial 9 Q3(c)',
+  id: 'cnt-down', title: 'Down counter loaded on reset', topic: 'seq-verilog', level: 2, source: 'Tutorial 9 Q3(c)', pdf: '[src:tut9 Q3]',
   statement: `6-bit down counter. On reset (synchronous, \`rst = 1\`) load \`start_val\`. Otherwise decrement by 1 every clock (wrapping from 0 to 63).`,
   starter: `module downcnt (input clk, rst, input [5:0] start_val, output reg [5:0] q);
 
@@ -443,7 +443,7 @@ endmodule`,
   hints: ['The reset branch loads start_val instead of 0.'],
 },
 {
-  id: 'shift4', title: '4-bit serial-in shift register', topic: 'seq-verilog', level: 2, source: 'L19 / Tutorial 8',
+  id: 'shift4', title: '4-bit serial-in shift register', topic: 'seq-verilog', level: 2, source: 'L19–L20 / Tutorial 8', pdf: '[src:10 p24-29; tut8 Q3]',
   statement: `On each rising clock edge shift \`q\` left by one and insert \`din\` at the LSB: \`q <= {q[2:0], din}\`. Synchronous reset clears \`q\`.`,
   starter: `module shift4 (input clk, rst, din, output reg [3:0] q);
 
@@ -457,7 +457,7 @@ endmodule`,
   hints: ['Concatenation: {q[2:0], din} drops q[3] and appends din.'],
 },
 {
-  id: 'johnson', title: 'Johnson (twisted ring) counter', topic: 'seq-verilog', level: 2, source: 'L19 style',
+  id: 'johnson', title: 'Johnson (twisted ring) counter', topic: 'seq-verilog', level: 2, source: 'Extension in L19 style (not in the slides)', pdf: '[src:10 p27-29]',
   statement: `4-bit Johnson counter: each edge shifts left and feeds the **inverted** MSB back into the LSB: \`q <= {q[2:0], ~q[3]}\`. Synchronous reset to 0000. (Sequence: 0000, 0001, 0011, 0111, 1111, 1110, …)`,
   starter: `module johnson (input clk, rst, output reg [3:0] q);
 
@@ -471,7 +471,7 @@ endmodule`,
   hints: ['Same as a shift register, but the serial input is ~q[3].'],
 },
 {
-  id: 'monitor-alarm', title: 'Event-count monitor', topic: 'seq-verilog', level: 3, source: 'Tutorial 9 Q2',
+  id: 'monitor-alarm', title: 'Event-count monitor', topic: 'seq-verilog', level: 3, source: 'Tutorial 9 Q2', pdf: '[src:tut9 Q2]',
   statement: `A counter counts the clock cycles in which \`evnt\` is HIGH. When the count **exceeds** the 6-bit \`thresh\` the circuit asserts \`alarm\` and the counter **stops**. \`rst\` (synchronous) clears the counter.
 
 *Hint from the tutorial: \`alarm\` is combinational, derived from the count and the threshold; it also decides whether the counter counts.*`,
@@ -489,7 +489,7 @@ endmodule`,
   hints: ['Declare `reg [5:0] count;` inside the module (it is not a port).', '`assign alarm = (count > thresh);` then count only if `evnt && !alarm`.'],
 },
 {
-  id: 'dec24-case', title: '2-to-4 decoder (case)', topic: 'comb-blocks', level: 1, source: 'Past paper CE1005 2018/19 S1 Q3(b)',
+  id: 'dec24-case', title: '2-to-4 decoder (case)', topic: 'comb-blocks', level: 1, source: 'Past paper 2018/19 S1 Q3(b)', pdf: '[src:pp1819s1 Q3b; 08B p14]',
   statement: `Write a 2-to-4 decoder using a **\`case\`** statement. Input \`in[1:0]\`, output \`out[3:0]\` (one-hot: \`out[i] = 1\` when \`in = i\`).`,
   starter: `module dec2to4 (input [1:0] in, output reg [3:0] out);
 
@@ -507,7 +507,7 @@ endmodule`,
   hints: ['One case item per input value; the last can be `default`.'], must: ['\\bcase\\b'],
 },
 {
-  id: 'updown', title: 'Up/down counter with parameter width', topic: 'seq-verilog', level: 2, source: 'Past paper CE1005 2018/19 S1 Q4(a)',
+  id: 'updown', title: 'Up/down counter with parameter width', topic: 'seq-verilog', level: 2, source: 'Past paper 2018/19 S1 Q4(a)', pdf: '[src:pp1819s1 Q4a; 10 p20]',
   statement: `Counter whose width is set by \`parameter W\` (default 8). When \`up = 1\` it counts up, when \`up = 0\` it counts down, on each rising clock edge. Synchronous reset to 0.`,
   starter: `module updown #(parameter W = 8) (input clk, rst, up, output reg [W-1:0] q);
 
@@ -523,7 +523,7 @@ endmodule`,
 },
 /* ----------------------------------------------------------------------- FSM */
 {
-  id: 'fsm-seq', title: 'Consecutive-ones detector (Moore FSM)', topic: 'fsm', level: 3, source: 'Tutorial 10 Q1',
+  id: 'fsm-seq', title: 'Consecutive-ones detector (Moore FSM)', topic: 'fsm', level: 3, source: 'Tutorial 10 Q1', pdf: '[src:tut10 Q1; 12 p19-30]',
   statement: `Single input \`in\`, single output \`out\`. The output goes to 1 from the **second consecutive 1** and stays 1 until **two consecutive 0s** have been received.
 
 Implement it as a **Moore** machine with these four states (reset state S0):
@@ -569,7 +569,7 @@ endmodule`,
   biasHigh: true,
 },
 {
-  id: 'moore-1011', title: '"1011" sequence detector (Mealy, overlapping)', topic: 'fsm', level: 3, source: 'FSM design practice',
+  id: 'moore-1011', title: '"1011" sequence detector (Mealy, overlapping)', topic: 'fsm', level: 3, source: 'FSM design practice (not a slides example)', pdf: '[src:12 p30]',
   statement: `Detect the serial pattern **1 0 1 1** (overlapping patterns allowed: 1011011 contains two). Use a **Mealy** machine: \`out\` is HIGH during the cycle in which the **last** bit of the pattern is present on \`in\` (state = "saw 101" **and** \`in = 1\`), so \`out\` depends on both the state and the input.
 
 States: S0 (nothing), S1 (saw 1), S2 (saw 10), S3 (saw 101). Synchronous reset to S0.
@@ -604,7 +604,7 @@ endmodule`,
   biasHigh: true,
 },
 {
-  id: 'traffic', title: 'Traffic-light controller', topic: 'fsm', level: 2, source: 'Lab / FSM practice',
+  id: 'traffic', title: 'Traffic-light controller', topic: 'fsm', level: 2, source: 'FSM practice', pdf: '[src:11 p12-19]',
   statement: `Moore FSM with outputs \`light = {red, yellow, green}\`.
 
 - **RED** (\`3'b100\`): stays RED until the input \`car\` is 1, then goes to GREEN.

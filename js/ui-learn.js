@@ -39,6 +39,7 @@
     app.innerHTML = `<section class="page article">
 <div class="crumbs"><a href="#/learn">Learn</a> › ${esc(t.lec)}</div>
 <h1>${esc(t.title)}</h1>
+${t.sources ? `<div class="groundtruth"><p><b>Ground truth</b> ${mdInline(t.sources)}</p><p class="muted">Every <span class="src">📄 chip</span> on this page <span class="hasfiles">opens the course PDF at that page</span><span class="nofiles-only">names a course PDF and page number (open your own copy from the course site)</span>, so you can check the note against the slides. Boxes marked <i>Beyond the slides</i> are extra context that the lecture PDFs do not cover.</p></div>` : ''}
 <div class="prose">${md(t.notes)}</div>
 <div class="card practice-box"><h2>Practise this topic</h2>
 <div class="pb-grid">
@@ -49,6 +50,7 @@
 </div></div>
 <div class="pager">${prev ? `<a href="#/learn/${prev.id}">← ${esc(prev.title)}</a>` : '<span></span>'}${next ? `<a href="#/learn/${next.id}">${esc(next.title)} →</a>` : '<span></span>'}</div>
 </section>`;
+    if (SC.mountFigures) SC.mountFigures(app);
     // copy buttons for code blocks + "try in playground"
     SC.$$('pre.code', app).forEach((pre) => {
       if (pre.dataset.lang !== 'verilog') return;

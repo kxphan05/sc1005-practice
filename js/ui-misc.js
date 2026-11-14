@@ -16,7 +16,7 @@
 <div class="hero"><div><h1>SC1005 Digital Logic<br><span>exam practice</span></h1>
 <p class="lead">Notes, a Verilog editor with a built-in simulator, spaced-repetition flashcards, generated drills and full-length mock exams in the final-exam format.</p>
 <div class="row"><a class="btn primary big" href="#/exams">Take a mock exam</a><a class="btn big" href="#/playground">Open Verilog playground</a></div></div>
-<div class="card examfacts"><h3>Final exam format</h3><ul><li><b>Nov/Dec 2026</b>, 1 hour 30 minutes</li><li><b>Closed book</b></li><li><b>2 questions</b>, unequal marks</li><li><b>Q1</b>: answers shaded on the OMR sheet</li><li><b>Q2</b>: written on the question paper (only these answers are assessed)</li></ul><a href="#/prep">Exam strategy →</a></div></div>
+<div class="card examfacts"><h3>Final exam format</h3><ul><li><b>24 Nov 2026</b> (course schedule), 1 hour 30 minutes</li><li><b>Closed book</b></li><li><b>2 questions</b>, unequal marks</li><li><b>Q1</b>: answers shaded on the OMR sheet</li><li><b>Q2</b>: written on the question paper (only these answers are assessed)</li></ul><a href="#/prep">Exam strategy →</a></div></div>
 <div class="grid quick">
 <a class="card qk" href="#/cards"><h3><span class="qi">🃏</span>Flashcards</h3><p>${due} due today</p>${bar(p.cardsKnown, p.cardsTotal)}<small>${p.cardsKnown}/${p.cardsTotal} well known</small></a>
 <a class="card qk" href="#/practice${nextP ? '/' + nextP.id : ''}"><h3><span class="qi">⌨️</span>Verilog problems</h3><p>${nextP ? 'Next: ' + esc(nextP.title) : 'All solved'}</p>${bar(p.solved, p.problems)}<small>${p.solved}/${p.problems} solved</small></a>
@@ -32,7 +32,7 @@
     SC.pageTitle = 'Exam prep';
     app.innerHTML = `<section class="page article"><h1>Exam prep</h1><div class="prose">${md(`
 ## The paper
-- **Nov/Dec 2026**, 1 h 30 min, **closed book**, 2 questions, *unequal marks*.
+- **Tuesday 24 Nov 2026** (per the course schedule [src:sched]), 1 h 30 min, **closed book**, in person, 2 questions, *unequal marks*. Check the official exam timetable for time and venue.
 - **Question 1**: multiple choice; shade answers on the **OMR sheet** (hand in separately).
 - **Question 2**: structured written answers **on the question paper**; only answers in the answer spaces are assessed. Do not attach extra papers.
 - Write your matric and seat numbers on both the paper and the OMR sheet.
@@ -82,8 +82,12 @@ From the 2018/19 papers:
   SC.route('/files-disabled', (app) => {
     SC.pageTitle = 'Files';
     const files = SC.files;
+    const chips = (keys) => mdInline(keys.map((k) => `[src:${k}]`).join(' '));
     app.innerHTML = `<section class="page"><h1>Course files</h1>
 <p class="lead">${files.reduce((a, c) => a + c.items.length, 0)} documents from the course folder, for quick reference. PDFs open in a new tab.</p>
+<div class="card"><h2 style="margin-top:0">Which slides cover which lecture</h2>
+<p class="muted">These PDFs are the ground truth for everything on this site. Notes, flashcards and MCQ explanations cite them with <span class="src">📄 chips</span> that open the PDF at the cited page. Mapping taken from the course schedule and the weekly lecture-summary PDFs.</p>
+<div class="tw"><table class="lecmap"><thead><tr><th>Lecture</th><th>Content</th><th>Slides</th></tr></thead><tbody>${SC.lectureMap.map(([l, what, keys]) => `<tr><td>${esc(l)}</td><td>${esc(what)}</td><td>${chips(keys)}</td></tr>`).join('')}</tbody></table></div></div>
 <input type="search" id="fs" class="search" placeholder="Filter files…" aria-label="Filter files">
 <div id="flist">${files.map((c) => `<div class="fcat"><h2>${esc(c.cat)} <small class="muted">${c.items.length}</small></h2><ul class="files">${c.items.map((f) => `<li data-n="${esc((f.name + ' ' + c.cat).toLowerCase())}"><a href="${esc(f.path).replace(/ /g, '%20')}" target="_blank" rel="noopener"><span class="ext ${f.ext}">${f.ext}</span> ${esc(f.name)}</a> <span class="muted">${f.kb >= 1024 ? (f.kb / 1024).toFixed(1) + ' MB' : f.kb + ' KB'}</span></li>`).join('')}</ul></div>`).join('')}</div></section>`;
     $('#fs').oninput = (e) => {
