@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SC1005 Digital Logic Practice</title>
+<meta name="description" content="Exam practice for SC1005 Digital Logic: notes, Verilog playground with simulator, flashcards, drills and mock exams.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e7c66'/%3E%3Cpath d='M14 22h14a10 10 0 0 1 0 20H14zM28 32h22M6 27h8M6 37h8' stroke='white' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vendor/cm/codemirror.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script>try{var t=localStorage.getItem('sc1005:theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="#/"><span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64" width="26" height="26"><rect width="64" height="64" rx="14" fill="currentColor"/><path d="M14 22h14a10 10 0 0 1 0 20H14zM28 32h22M6 27h8M6 37h8" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg></span><span class="bt">SC1005<small>Digital Logic</small></span></a>
+  <nav id="nav">
+    <a href="#/learn" data-r="learn">Learn</a>
+    <a href="#/practice" data-r="practice">Code</a>
+    <a href="#/playground" data-r="playground">Playground</a>
+    <a href="#/cards" data-r="cards">Flashcards</a>
+    <a href="#/quiz" data-r="quiz">MCQ</a>
+    <a href="#/drills" data-r="drills">Drills</a>
+    <a href="#/exams" data-r="exams">Mock exams</a>
+    <a href="#/prep" data-r="prep">Exam prep</a>
+  </nav>
+  <button id="themeBtn" class="icon-btn" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
+</header>
+<main id="app"><p class="loading">Loading…</p></main>
+<footer class="foot">Practice site for SC1005 Digital Logic. Progress is saved in this browser only. The Verilog simulator is a teaching subset (2-state, no tri-state or functions).</footer>
+
+<script src="vendor/cm/codemirror.min.js"></script>
+<script src="vendor/cm/mode/verilog/verilog.min.js"></script>
+<script src="vendor/cm/addon/edit/closebrackets.min.js"></script>
+<script src="vendor/cm/addon/edit/matchbrackets.min.js"></script>
+<script src="js/md.js"></script>
+<script src="js/boolean.js"></script>
+<script src="js/diagrams.js"></script>
+<script src="js/vparse.js"></script>
+<script src="js/vsim.js"></script>
+<script src="js/vtools.js"></script>
+<script src="js/wave.js"></script>
+<script src="js/drills.js"></script>
+<script src="content/notes.js"></script>
+<script src="content/cards.js"></script>
+<script src="content/mcq.js"></script>
+<script src="content/problems.js"></script>
+<script src="content/exams.js"></script>
+<script src="js/filelist.js"></script>
+<script src="js/core.js"></script>
+<script src="js/ui-learn.js"></script>
+<script src="js/ui-code.js"></script>
+<script src="js/ui-study.js"></script>
+<script src="js/ui-exam.js"></script>
+<script src="js/ui-misc.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
